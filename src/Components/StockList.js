@@ -1,11 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useGlobalContext } from '../context'
+import { useGlobalContext } from '../context/context'
 import { BsFillCaretDownFill, BsFillCaretUpFill } from 'react-icons/bs'
 
 const StockList = () => {
 
-  const { stock } = useGlobalContext()
+  const { stock, removeStock } = useGlobalContext()
   const navigate = useNavigate()
 
   const stockMovementColor = (change) => {
@@ -53,7 +53,16 @@ const StockList = () => {
                   <td>{h}</td>
                   <td>{l}</td>
                   <td>{o}</td>
-                  <td>{pc}</td>
+                  <td>{pc}
+                    <button
+                      className='btn btn-danger btn-sm ml-3 d-inline-block delete-button'
+                      onClick={(e)=>{
+                        e.stopPropagation()
+                        removeStock(symbol)
+                      }}>
+                        Remove
+                    </button>
+                  </td>
               </tr>
             )
           })}

@@ -1,5 +1,5 @@
 import {useState, useEffect, useContext, createContext} from 'react'
-import finnhub from './API/finnhub'
+import finnhub from '../API/finnhub'
 
 export const AppContext = createContext()
 
@@ -15,7 +15,7 @@ export const AppProvider = ({children}) => {
     }
 
     const removeStock = (stock) => {
-        watchList.filter(item => item !== stock)
+        return setWatchList(watchList.filter(item => item !== stock))
     }
 
     useEffect(() => {

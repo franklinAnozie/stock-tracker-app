@@ -1,38 +1,13 @@
-import React, {useState, useEffect} from 'react'
-import finnhub from '../API/finnhub'
-import { useGlobalContext } from '../context'
+import React from 'react'
+import { useGlobalContext as contextOne } from '../context/autoCompleteContext'
+import { useGlobalContext as contextTwo } from '../context/context'
 
 const AutoComplete = () => {
-  const {addStock, removeStock} = useGlobalContext()
-  const [searchText, setSearchText] = useState('')
-  const [searchResult, setSearchResult] = useState([])
-  const handleChange = e => {
+  const { searchResult, searchText, setSearchText } = contextOne()
+  const { addStock } = contextTwo()
+    const handleChange = e => {
     setSearchText(e.target.value)
   }
-  useEffect(() => {
-    const fetchData = async() => {
-      try {
-        const resp = await finnhub.get(
-          `/search`,
-          {
-            params: 
-              {
-                q: searchText
-              }
-          }
-        )
-        setSearchResult(resp.data.result)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    if (searchText.length > 0 && searchText !== '') {
-      fetchData()
-    } else {
-      setSearchResult([])
-    }
-  }, [searchText])
-
   const showDropDown = () => {
     return searchResult.length > 1 ? 'show' : ''
   }

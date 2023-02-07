@@ -1,14 +1,19 @@
 import React from 'react'
-import AutoComplete from '../Components/AutoComplete'
+import AutoComplete from '../Components/autoComplete'
 import StockList from '../Components/StockList'
+import { AppProvider } from '../context/autoCompleteContext'
+import { AppProvider as MainProvider } from '../context/context';
 
 const SummaryPage = () => {
   
   return (
     <div>
-    Stock View Page
-        <AutoComplete />
+      <MainProvider>
+        <AppProvider>
+          <AutoComplete />
+        </AppProvider>
         <StockList />
+      </MainProvider>
     </div>
   )
 }
