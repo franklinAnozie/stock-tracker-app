@@ -1,11 +1,10 @@
-import React from 'react'
+import {useState} from 'react'
 import Chart from 'react-apexcharts'
-import { useGlobalContext } from '../context/detailsContext'
 
-export const StockChart = () => {
-    const { chartData, symbol, dateFormat, setDateFormat } = useGlobalContext()
+export const StockChart = ({ chartData, symbol }) => {
 
     const {day, week, year} = chartData
+    const [dateFormat, setDateFormat] = useState('2hrs')
 
     const dateSelector = () => {
         switch (dateFormat){
@@ -19,8 +18,7 @@ export const StockChart = () => {
                 return day
         }
     }
-
-    //const paintSelected = dateSelector()[dateSelector().length-1].y - dateSelector()[0].y > 0 ? 'green' : 'red'
+    // const paintSelected = dateSelector()[dateSelector().length-1].y - dateSelector()[0].y > 0 ? 'green' : 'red'
 
     const options = {
         // colors: [paintSelected()],
